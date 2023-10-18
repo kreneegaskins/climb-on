@@ -1,6 +1,29 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import gql from 'graphql-tag'
+import { useQuery } from '@vue/apollo-composable'
+
+const USER_PUBLIC_PROFILE_QUERY = gql`
+  query MyStats {
+    stats {
+      totalClimbs
+      totalCrags
+    }
+  }
+`
+
+export default {
+  name: 'App',
+  setup () {
+    const { result, loading, error } = useQuery(USER_PUBLIC_PROFILE_QUERY);
+    return {
+      result,
+      loading, 
+      error
+    }
+  }
+}
 </script>
 
 <template>
@@ -16,7 +39,12 @@ import HelloWorld from './components/HelloWorld.vue'
       </nav>
     </div>
   </header>
-
+  <p v-if="error">Something went wrong...</p>
+  <p v-if="loading">Loading...</p>
+  <p v-else>
+    {{ result.stats.totalCrags }}
+  </p>
+  <div></div>
   <RouterView />
 </template>
 
