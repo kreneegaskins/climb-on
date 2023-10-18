@@ -20,7 +20,6 @@ const app = createApp({
   setup () {
     provide(DefaultApolloClient, apolloClient)
   },
-
   render: () => h(App),
 })
 
