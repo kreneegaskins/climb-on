@@ -39,10 +39,12 @@ export default {
       </nav>
     </div>
   </header>
+  <h2>Stats</h2>
   <p v-if="error">Something went wrong...</p>
   <p v-if="loading">Loading...</p>
   <p v-else>
-    {{ result.stats.totalCrags }}
+    Total Crags: {{ result.stats.totalCrags }}
+    Total Climbs: {{ result.stats.totalClimbs }}
   </p>
   <div></div>
   <RouterView />
